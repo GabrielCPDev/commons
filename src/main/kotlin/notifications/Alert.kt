@@ -1,0 +1,4 @@
+package notifications
+
+class Alert {
+}

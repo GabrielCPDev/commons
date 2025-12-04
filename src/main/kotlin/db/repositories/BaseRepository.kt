@@ -15,6 +15,6 @@ interface BaseRepository <T, ID> {
     suspend fun deleteById(id: ID)
     suspend fun existsById(id: ID): Boolean
     suspend fun count(): Long
-    suspend fun exists(id: ID): Boolean
+    suspend fun exists(): Boolean
 
 }

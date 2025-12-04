@@ -4,10 +4,6 @@ on:
   push:
     branches:
       - develop
-    paths:
-      - 'commons/**'
-      - 'build.gradle.kts'
-      - 'settings.gradle.kts'
 
 permissions:
   contents: read
@@ -31,11 +27,11 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Run tests for commons
-        run: ./gradlew :commons:test --no-daemon
+      - name: Run tests
+        run: ./gradlew test --no-daemon
 
-      - name: Publish commons to GitHub Packages
-        run: ./gradlew :commons:publish --no-daemon
+      - name: Publish to GitHub Packages
+        run: ./gradlew publish --no-daemon
         env:
           GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

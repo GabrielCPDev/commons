@@ -1,0 +1,41 @@
+name: Publish Commons
+
+on:
+  push:
+    branches:
+      - develop
+    paths:
+      - 'commons/**'
+      - 'build.gradle.kts'
+      - 'settings.gradle.kts'
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish-commons:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Run tests for commons
+        run: ./gradlew :commons:test --no-daemon
+
+      - name: Publish commons to GitHub Packages
+        run: ./gradlew :commons:publish --no-daemon
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

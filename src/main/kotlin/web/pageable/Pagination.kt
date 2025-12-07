@@ -11,7 +11,7 @@ data class Pagination(
     }
 
     companion object {
-        fun of(page: Int, size: Int, sort: List<String>?): Pagination {
+        fun of(page: Int, size: Int, sort: List<String>? = null): Pagination {
             val sortFields = sort?.map { param ->
                 val parts = param.split(",")
                 SortField(

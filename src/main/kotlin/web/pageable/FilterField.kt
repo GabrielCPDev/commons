@@ -2,5 +2,6 @@ package web.pageable
 
 data class FilterField(
     val property: String,
-    val value: FilterValue
+    val value: String
 )
+

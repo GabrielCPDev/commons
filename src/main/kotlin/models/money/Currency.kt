@@ -1,9 +1,10 @@
 package models.money
 
-enum class Currency(val code: String) {
-    BRL("BRL"),
-    USD("USD"),
-    EUR("EUR");
+enum class Currency(val value: String) {
+    BRL("Brazilian Real"),
+    USD("US dollar"),
+    BTC("Bitcoin"),
+    EUR("euro");
 
-    override fun toString(): String = code
+    override fun toString(): String = value
 }

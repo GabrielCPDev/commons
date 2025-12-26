@@ -43,7 +43,7 @@ data class Money private constructor(
     }
 
     override fun toString(): String =
-        "${currency.code} ${amount.toPlainString()}"
+        "${currency.value} ${amount.toPlainString()}"
 
     companion object {
         fun of(amount: BigDecimal, currency: Currency): Money {

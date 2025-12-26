@@ -31,6 +31,17 @@ data class Money private constructor(
         return of(amount.subtract(other.amount), currency)
     }
 
+    fun apply(rate: ExchangeRate): Money {
+        require(currency == rate.from) {
+            "Money currency ${currency} does not match rate source ${rate.from}"
+        }
+
+        return Money(
+            amount = amount.multiply(rate.rate),
+            currency = rate.to
+        )
+    }
+
     override fun toString(): String =
         "${currency.code} ${amount.toPlainString()}"
 

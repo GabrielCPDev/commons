@@ -10,7 +10,9 @@ data class Money private constructor(
 ) {
 
     init {
-        require(amount.scale() <= 2) { "Money must have at most 2 decimal places" }
+        require(amount.scale() <= currency.scale) {
+            "Money for ${currency.name} must have at most ${currency.scale} decimal places"
+        }
     }
 
     fun isPositive(): Boolean = amount > BigDecimal.ZERO
@@ -33,25 +35,24 @@ data class Money private constructor(
 
     fun apply(rate: ExchangeRate): Money {
         require(currency == rate.from) {
-            "Money currency ${currency} does not match rate source ${rate.from}"
+            "Money currency ${currency.name} does not match rate source ${rate.from.name}"
         }
 
-        return Money(
-            amount = amount.multiply(rate.rate),
-            currency = rate.to
-        )
+        val converted = amount.multiply(rate.rate)
+        return of(converted, rate.to)
     }
 
     override fun toString(): String =
         "${currency.value} ${amount.toPlainString()}"
 
     companion object {
+
         fun of(amount: BigDecimal, currency: Currency): Money {
-            val normalized = amount.setScale(2, RoundingMode.HALF_UP)
+            val normalized = amount.setScale(currency.scale, RoundingMode.HALF_UP)
             return Money(normalized, currency)
         }
 
         fun zero(currency: Currency): Money =
-            Money(BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP), currency)
+            Money(BigDecimal.ZERO.setScale(currency.scale, RoundingMode.HALF_UP), currency)
     }
 }

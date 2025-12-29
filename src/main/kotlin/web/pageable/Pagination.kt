@@ -1,20 +1,20 @@
 package web.pageable
 
+import web.pageable.filters.FilterField
+import web.pageable.filters.SortField
+
 data class Pagination(
     val page: Int = 0,
     val size: Int = 20,
     val sort: List<SortField> = emptyList(),
     val filters: List<FilterField> = emptyList()
 ) {
-
     companion object {
-
         fun of(
             page: Int,
             size: Int,
             sort: List<String>? = null
         ): Pagination {
-
             val sortFields = sort?.map { param ->
                 val parts = param.split(",")
                 SortField(

@@ -1,4 +1,6 @@
-package web.pageable
+package web.pageable.filters
+
+import web.pageable.SortDirection
 
 data class SortField(
     val property: String,

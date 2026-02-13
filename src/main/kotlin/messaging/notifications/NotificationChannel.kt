@@ -1,4 +1,4 @@
-package notifications
+package messaging.notifications
 
 enum class NotificationChannel {
     WEBSOCKET,

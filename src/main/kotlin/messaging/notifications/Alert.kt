@@ -1,4 +1,4 @@
-package notifications
+package messaging.notifications
 
 import models.ID
 import java.time.Instant

@@ -1,9 +1,14 @@
 package messaging.notifications
 
-import models.ID
+import java.time.Instant
 
-class Notification<T>(
-    id: ID,
-    channels: List<NotificationChannel>,
-    val data: T
-) : Alert(id, channels)
+data class Notification<T>(
+    val id: String,
+    val channels: List<NotificationChannel>,
+    val data: T,
+    val createdAt: Instant = Instant.now()
+) {
+    init {
+        require(channels.isNotEmpty()) { "At least one channel must be provided" }
+    }
+}

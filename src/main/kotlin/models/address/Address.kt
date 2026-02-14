@@ -4,7 +4,7 @@ import models.Name
 
 data class Address(
     val street: Name,
-    val neighborhood: Name?,
+    val neighborhood: Name? = null,
     val city: Name,
     val state: Name,
     val zipCode: ZipCode,

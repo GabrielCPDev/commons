@@ -1,14 +1,25 @@
 package messaging.notifications
 
-import java.time.Instant
+sealed class Notification {
+    data class Email(
+        val address: String,
+        val subject: String,
+        val body: String
+    ) : Notification()
 
-data class Notification<T>(
-    val id: String,
-    val channels: List<NotificationChannel>,
-    val data: T,
-    val createdAt: Instant = Instant.now()
-) {
-    init {
-        require(channels.isNotEmpty()) { "At least one channel must be provided" }
-    }
+    data class Sms(
+        val phoneNumber: String,
+        val text: String
+    ) : Notification()
+
+    data class WhatsApp(
+        val phoneNumber: String,
+        val text: String
+    ) : Notification()
+
+    data class Push(
+        val deviceToken: String,
+        val title: String,
+        val body: String
+    ) : Notification()
 }

@@ -11,7 +11,5 @@ data class Address(
     val country: Country,
     val number: String,
     val complement: String? = null,
-    val latitude: Double? = null,
-    val longitude: Double? = null,
     val coordinates: Coordinates? = null
 )

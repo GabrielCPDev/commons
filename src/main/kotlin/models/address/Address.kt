@@ -12,5 +12,6 @@ data class Address(
     val number: String,
     val complement: String? = null,
     val latitude: Double? = null,
-    val longitude: Double? = null
+    val longitude: Double? = null,
+    val coordinates: Coordinates? = null
 )

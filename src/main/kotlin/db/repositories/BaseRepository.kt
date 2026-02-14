@@ -11,7 +11,8 @@ interface BaseRepository <T, ID> {
     suspend fun findAll(pagination: Pagination): PageResult<T>
     suspend fun delete(entity: T)
     suspend fun deleteAll()
+    suspend fun deleteAll(ids: List<ID>)
     suspend fun deleteById(id: ID)
-    suspend fun existsById(id: ID): Boolean
-    suspend fun count(id: ID): Long
+    suspend fun count(): Long
+    suspend fun exists(id: ID): Boolean
 }

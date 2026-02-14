@@ -1,4 +1,0 @@
-package notifications
-
-class Alert {
-}

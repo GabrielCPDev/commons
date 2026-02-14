@@ -18,8 +18,15 @@ sealed class Notification {
     ) : Notification()
 
     data class Push(
-        val deviceToken: String,
         val title: String,
-        val body: String
-    ) : Notification()
+        val body: String,
+        val token: String? = null,
+        val topic: String? = null
+    ) : Notification() {
+        init {
+            require(token != null || topic != null) {
+                "A Push notification must have either a token or a topic"
+            }
+        }
+    }
 }

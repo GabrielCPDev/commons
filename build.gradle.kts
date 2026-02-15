@@ -4,13 +4,19 @@ plugins {
 }
 
 group = "com.iggdrasil.shared"
-version = "1.0.35-SNAPSHOT"
+version = "1.0.36-SNAPSHOT"
 
 repositories {
     mavenCentral()
 }
 
+val kotlinCoroutineVersion = "1.8.1"
 dependencies {
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutineVersion")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:$kotlinCoroutineVersion")
+
+    // Testes com coroutines
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$kotlinCoroutineVersion")
     testImplementation(kotlin("test"))
 }
 

@@ -1,5 +1,6 @@
 package db.repositories
 
+import kotlinx.coroutines.flow.Flow
 import web.pageable.PageResult
 import web.pageable.Pagination
 
@@ -7,7 +8,7 @@ interface BaseRepository <T, ID> {
     suspend fun save(entity: T): T
     suspend fun update(entity: T): T
     suspend fun findById(id: ID): T?
-    suspend fun findAll(): List<T>
+    suspend fun findAll(): Flow<T>
     suspend fun findAll(pagination: Pagination): PageResult<T>
     suspend fun delete(entity: T)
     suspend fun deleteAll()

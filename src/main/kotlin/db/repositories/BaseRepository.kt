@@ -4,7 +4,7 @@ import kotlinx.coroutines.flow.Flow
 import web.pageable.PageResult
 import web.pageable.Pagination
 
-interface BaseRepository <T, ID> {
+interface BaseRepository<T, ID> {
     suspend fun save(entity: T): T
     suspend fun update(entity: T): T
     suspend fun findById(id: ID): T?
@@ -16,4 +16,7 @@ interface BaseRepository <T, ID> {
     suspend fun deleteById(id: ID)
     suspend fun count(): Long
     suspend fun exists(id: ID): Boolean
+    suspend fun saveAll(entities: Iterable<T>): List<T> {
+        return entities.map { save(it) }
+    }
 }

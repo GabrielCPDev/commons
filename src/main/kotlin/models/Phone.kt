@@ -1,4 +1,4 @@
-package commons
+package models
 
 @JvmInline
 value class Phone private constructor(val value: String) {

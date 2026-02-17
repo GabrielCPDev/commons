@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "com.iggdrasil.shared"
-version = "1.0.41-SNAPSHOT"
+version = "1.0.42-SNAPSHOT"
 
 repositories {
     mavenCentral()

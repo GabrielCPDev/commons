@@ -5,7 +5,6 @@ import kotlinx.coroutines.flow.flow
 import kotlin.collections.isNotEmpty
 import kotlin.collections.toList
 
-
 fun <T> Flow<T>.chunked(size: Int): Flow<List<T>> = flow {
     val chunk = mutableListOf<T>()
     collect { value ->

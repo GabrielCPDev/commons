@@ -5,7 +5,7 @@ import java.time.Instant
 abstract class AbstractEntity<ID>(
     open val id: ID,
     open val createdAt: Instant,
-    open val updatedAt: Instant
+    open var updatedAt: Instant
 ) {
 
     override fun equals(other: Any?): Boolean {

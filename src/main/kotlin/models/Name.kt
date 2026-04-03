@@ -2,7 +2,8 @@ package models
 
 class Name private constructor(val value: String) {
 
-    val shortValue: String by lazy { buildShortValue() }
+    val shortValue: String
+        get() = buildShortValue()
 
     init {
         require(value.isNotBlank()) { "Name cannot be empty" }

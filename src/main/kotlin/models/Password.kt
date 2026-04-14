@@ -1,5 +1,6 @@
 package models
 
+import java.security.SecureRandom
 import java.util.regex.Pattern
 
 @JvmInline
@@ -12,9 +13,13 @@ value class Password private constructor(val value: String) {
         private val DIGIT = Pattern.compile("[0-9]")
         private val SPECIAL = Pattern.compile("[^a-zA-Z0-9]")
 
+        private const val CHAR_UPPER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        private const val CHAR_LOWER = "abcdefghijklmnopqrstuvwxyz"
+        private const val CHAR_DIGIT = "0123456789"
+        private const val CHAR_SPECIAL = "!@#$%^&*()-_"
+
         fun of(password: String): Password {
             validate(password)
-
             return Password(password)
         }
 
@@ -27,6 +32,26 @@ value class Password private constructor(val value: String) {
         }
 
         fun fromHash(hash: String): Password = Password(hash)
+
+        fun generate(length: Int = MIN_LENGTH): Password {
+            val random = SecureRandom()
+
+            val passwordChars = mutableListOf(
+                CHAR_UPPER[random.nextInt(CHAR_UPPER.length)],
+                CHAR_LOWER[random.nextInt(CHAR_LOWER.length)],
+                CHAR_DIGIT[random.nextInt(CHAR_DIGIT.length)],
+                CHAR_SPECIAL[random.nextInt(CHAR_SPECIAL.length)]
+            )
+
+            val allChars = CHAR_UPPER + CHAR_LOWER + CHAR_DIGIT + CHAR_SPECIAL
+            repeat(length - 4) {
+                passwordChars.add(allChars[random.nextInt(allChars.length)])
+            }
+
+            passwordChars.shuffle(random)
+
+            return Password(passwordChars.joinToString(""))
+        }
     }
 
     override fun toString(): String = "********"

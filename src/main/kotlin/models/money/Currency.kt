@@ -11,4 +11,3 @@ enum class Currency(
 
     override fun toString(): String = value
 }
-
